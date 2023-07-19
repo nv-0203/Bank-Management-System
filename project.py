@@ -5,7 +5,7 @@ import os
 
 host = os.environ.get('DB_HOST', 'localhost')  #by default set to 'localhost'. Set it according to your need.
 usr = os.environ.get('DB_USER', 'root')   #by default set to 'root'. Set the enviornment variable to the user you want to use with
-pas = os.environ.get('DB_PASSWORD', 'Eiman786$')   #IMPORTANT: set the password of your local database here eg. pas = os.environ.get('DB_PASSWORD', 'abcd123')
+pas = os.environ.get('DB_PASSWORD', '<DB_PASSWORD>')   #IMPORTANT: set the password of your local database here eg. pas = os.environ.get('DB_PASSWORD', 'abcd123')
 db = os.environ.get('DB_DATABASE', 'bank')  #Update with the database name that you have stored in your system. 
 
 mycon = con.connect(host=host, user=usr, password=pas, database=db)
