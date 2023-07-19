@@ -1,7 +1,9 @@
 # Bank-Management-System
 
-This project is built in Python and utilizes a MySQL database to manage banking operations.
-It is a Bank Management System developed for the usage and assistance of bank customers. In this application, the customer can perform the folllowing operations:
+
+Welcome to the Bank Management System project! <br>
+This project is built in Python and utilizes a MySQL database to manage banking operations. <br>
+It is developed for the usage and assistance of bank customers. In this application, the customer can perform the folllowing operations:
 - Check Balance
 - Deposit Money
 - Withdraw Money
