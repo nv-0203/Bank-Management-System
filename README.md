@@ -16,7 +16,7 @@ An employee can also access the database using separate set of login credentials
 
 ER Diagram of the DataBase:
 
-![ER Diagram](Images/ER%20Diagram.png)
+![ER Diagram](Images/ERD.png)
 
 ----
 ## INSTRUCTIONS TO USE
