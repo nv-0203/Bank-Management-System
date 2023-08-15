@@ -11,6 +11,40 @@ db = os.environ.get('DB_DATABASE', 'bank')  #Update with the database name that 
 mycon = con.connect(host=host, user=usr, password=pas, database=db)
 
 ID=0
+cash=0
+
+def intro():
+    print("\t\t\t\t WELCOME TO AAA BANK")
+    while(True):
+        print("1. Customer \t 2. Employee")
+        intro_choice=int(input("Enter an option:"))
+        if intro_choice==1:
+            customer()
+            break
+        elif intro_choice==2:
+            emp_login()
+            employee()
+            break
+        else:
+            print("Please select a valid option")
+
+#---------------------------------------------CUSTOMER---------------------------------------------------------
+
+def customer():
+    if mycon.is_connected()==False:
+        print("connection failed")
+    else:
+        while True:
+            print("1-Already a user? \t 2-New user?  ")
+            customer_choice=int(input("Enter choice:"))
+            if customer_choice==1:
+                login()
+                break
+            elif customer_choice==2:
+                account()
+                break
+            else:
+                print("Please select a valid option")
 
 def login():
     global ID
@@ -32,44 +66,64 @@ def login():
             login()
         options()
         
-
-def account():
-    global ID
+def options():
     if mycon.is_connected()==False:
-        print("Connection Failed")
+        print("connection failed")
     else:
         while True:
-            ID = int(input("Choose an ID (consists of 4 numbers of the format 1XXX):"))
-            query_account = "SELECT ID FROM customer WHERE ID = %s"
-            data_account = (ID,)
-            cursor = mycon.cursor()
-            cursor.execute(query_account, data_account)
-            cursor.fetchall()
-            count_account = cursor.rowcount
-            if count_account == 0:
-                print("Valid ID")
+            print("Please select an option")
+            print(" 1. Check Balance")
+            print(" 2. Deposit Money")
+            print(" 3. Withdraw Money")
+            print(" 4. Transfer Money")
+            print(" 5. Take Loan")
+            print(" 6. Update Account Details")
+            print(" 7. Delete Account")
+            print(" 8. Check Loans")
+            print(" 9. Exit")
+            option=int(input(" Enter option: "))
+            if option==1:
+                balance()
+                break
+            elif option==2:
+                deposit()
+                break
+            elif option==3:
+                withdraw()
+                break
+            elif option==4:
+                transfer()
+                break
+            elif option==5:
+                loan()
+                break
+            elif option==6:
+                update()
+                break
+            elif option==7:
+                delete()
+                break
+            elif option==8:
+                check_loans()
+                break
+            elif option==9:
+                print("--------------------------------------------------------")
                 break
             else:
-                print("This ID has already been selected. Kindly select another ID")
+                print("Please enter a valid option")
+        if (option != 9):
+            print("Do you want to continue?")
+            print("1-yes \t  2-no")
+            opt=int(input("Enter option:"))
+            print("--------------------------------------------------------------")
+            if opt==1:
+                options()
+            else:
+                print(" THANK YOU FOR USING OUR SERVICES")
+        else:
+            print(" THANK YOU FOR USING OUR SERVICES")
+            
 
-        password=input("Choose a password (not more than 10 characters) :")
-        name=input("Name:")
-        father_name=input("Father's name:")
-        dob=input("Date of Birth (YYYY-MM-DD) :")
-        city=input("City:")
-        gender=input("Gender (M/F): ")
-        phone_no=input("Phone Number:")
-        passport_no=input("Passport Number:")
-        balanc=int(input("Cash to be deposited:"))
-        data2=(ID, password, name, father_name, dob, city, gender, phone_no, passport_no,balanc) 
-        query2="insert into customer(ID, password, name, father_name, dob, city, gender, phone_no, passport_no, balance) values(%s ,%s,%s,%s ,%s,%s,%s ,%s,%s,%s)"
-        cursor=mycon.cursor()
-        cursor.execute(query2,data2)
-        mycon.commit()
-        print(" WELCOME ON BOARD AAA BANK")
-        print("Your Account has been successfully created!")
-
-cash=0
 
 def balance():
     global ID
@@ -340,78 +394,43 @@ def check_loans():
             else:
                 print("Invalid option. Please retry")
 
-def options():
-    if mycon.is_connected()==False:
-        print("connection failed")
-    else:
-        while True:
-            print("Please select an option")
-            print(" 1. Check Balance")
-            print(" 2. Deposit Money")
-            print(" 3. Withdraw Money")
-            print(" 4. Transfer Money")
-            print(" 5. Take Loan")
-            print(" 6. Update Account Details")
-            print(" 7. Delete Account")
-            print(" 8. Check Loans")
-            print(" 9. Exit")
-            option=int(input(" Enter option: "))
-            if option==1:
-                balance()
-                break
-            elif option==2:
-                deposit()
-                break
-            elif option==3:
-                withdraw()
-                break
-            elif option==4:
-                transfer()
-                break
-            elif option==5:
-                loan()
-                break
-            elif option==6:
-                update()
-                break
-            elif option==7:
-                delete()
-                break
-            elif option==8:
-                check_loans()
-                break
-            elif option==9:
-                print("--------------------------------------------------------")
-                break
-            else:
-                print("Please enter a valid option")
-        if (option != 9):
-            print("Do you want to continue?")
-            print("1-yes \t  2-no")
-            opt=int(input("Enter option:"))
-            print("--------------------------------------------------------------")
-            if opt==1:
-                options()
-            else:
-                print(" THANK YOU FOR USING OUR SERVICES")
-        else:
-            print(" THANK YOU FOR USING OUR SERVICES")
 
-def customer():
+def account():
+    global ID
     if mycon.is_connected()==False:
-        print("connection failed")
+        print("Connection Failed")
     else:
         while True:
-            print("1-Already a user? \t 2-New user?  ")
-            customer_choice=int(input("Enter choice:"))
-            if customer_choice==1:
-                login()
-                break
-            elif customer_choice==2:
-                account()
+            ID = int(input("Choose an ID (consists of 4 numbers of the format 1XXX):"))
+            query_account = "SELECT ID FROM customer WHERE ID = %s"
+            data_account = (ID,)
+            cursor = mycon.cursor()
+            cursor.execute(query_account, data_account)
+            cursor.fetchall()
+            count_account = cursor.rowcount
+            if count_account == 0:
+                print("Valid ID")
                 break
             else:
-                print("Please select a valid option")
+                print("This ID has already been selected. Kindly select another ID")
+
+        password=input("Choose a password (not more than 10 characters) :")
+        name=input("Name:")
+        father_name=input("Father's name:")
+        dob=input("Date of Birth (YYYY-MM-DD) :")
+        city=input("City:")
+        gender=input("Gender (M/F): ")
+        phone_no=input("Phone Number:")
+        passport_no=input("Passport Number:")
+        balanc=int(input("Cash to be deposited:"))
+        data2=(ID, password, name, father_name, dob, city, gender, phone_no, passport_no,balanc) 
+        query2="insert into customer(ID, password, name, father_name, dob, city, gender, phone_no, passport_no, balance) values(%s ,%s,%s,%s ,%s,%s,%s ,%s,%s,%s)"
+        cursor=mycon.cursor()
+        cursor.execute(query2,data2)
+        mycon.commit()
+        print(" WELCOME ON BOARD AAA BANK")
+        print("Your Account has been successfully created!")
+
 
 #---------------------------------------------EMPLOYEE---------------------------------------------------------------------------------
 
@@ -434,7 +453,31 @@ def emp_login():
             else:
                 print(" ID or password incorrect. Please retry.")
                 
-        
+def employee():
+    if mycon.is_connected()==False:
+        print("connection failed")
+    else:
+        while True:
+            print("1. View Loan List \t 2. Update customer account details \t 3. Delete customer account")
+            emp_option=int(input("Enter option:"))
+            if emp_option==1:
+                emp_loan_list()
+                break
+            elif emp_option==2:
+                emp_update()
+                break
+            elif emp_option==3:
+                emp_delete()
+                break
+            else:
+                print("Please select a valid option")
+                
+        emp_choice=int(input("Do u want to continue \n 1-yes \t 2-no"))
+        if emp_choice==1:
+            employee()
+        else:
+            print("-----------------------------------------------")
+
 def emp_loan_list():
     if mycon.is_connected()==False:
         print("connection failed")
@@ -511,48 +554,7 @@ def emp_delete():
                 print("User Account details deleted successfully")
                 break
             else:
-                print(" ID enetered does not exist")
+                print(" ID entered does not exist")
 
-def employee():
-    if mycon.is_connected()==False:
-        print("connection failed")
-    else:
-        while True:
-            print("1. View Loan List \t 2. Update customer account details \t 3. Delete customer account")
-            emp_option=int(input("Enter option:"))
-            if emp_option==1:
-                emp_loan_list()
-                break
-            elif emp_option==2:
-                emp_update()
-                break
-            elif emp_option==3:
-                emp_delete()
-                break
-            else:
-                print("Please select a valid option")
-                
-        emp_choice=int(input("Do u want to continue \n 1-yes \t 2-no"))
-        if emp_choice==1:
-            employee()
-        else:
-            print("-----------------------------------------------")
-
-
-def intro():
-    print("\t\t\t\t WELCOME TO AAA BANK")
-    while(True):
-        print("1. Customer \t 2. Employee")
-        intro_choice=int(input("Enter an option:"))
-        if intro_choice==1:
-            customer()
-            break
-        elif intro_choice==2:
-            emp_login()
-            employee()
-            break
-        else:
-            print("Please select a valid option")
-
-        
 intro()
+
