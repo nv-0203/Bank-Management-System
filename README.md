@@ -16,7 +16,7 @@ An employee can also access the database using separate set of login credentials
 
 ER Diagram of the DataBase:
 
-![ER Diagram](Images/ER%20Diagram.png)
+![ER Diagram](Images/erdiagram.png)
 
 ----
 ## INSTRUCTIONS TO USE
@@ -52,7 +52,7 @@ mysql -u <DATABASE_USER> -p <DATABASE_NAME> < dump.sql
 
 ### Running the Project
 Clone this GitHub repository to your local machine.
-Update the database connection details in the project.py file. Open project.py in a text editor and look for the following lines:
+Update the database connection details in the [bank.py](bank.py) file. Open [bank.py](bank.py) in a text editor and look for the following lines:
 
 ```python
 host = os.environ.get('DB_HOST', 'localhost')  
@@ -64,23 +64,23 @@ db = os.environ.get('DB_DATABASE', '<DATABASE_NAME>')
 Replace <DATABASE_PASSWORD>, and <DATABASE_NAME> with your MySQL credentials.
 You can change 'root' to any other user want.
 
-Run the code.py file using Python:
+Run the [bank.py](bank.py)  file using Python:
 
 ```bash
-python code.py
+python bank.py
 ```
 
 The Bank Management System will now run, and you can interact with the banking operations through the terminal.
 
 
 ----
-Customer-End Preview:
+### Previews
 
-![user end preview](https://github.com/nv-0203/Bank-Management-System/assets/98750039/5511c069-abf9-402e-8ed9-8c59cf47fe78)
+## Customer-End Preview:
+![Customer End](Images/Customer.png)
   
-Employee-End Preview:
-
-![employee-end preview](https://github.com/nv-0203/Bank-Management-System/assets/98750039/03a1f3ac-8c11-4378-a841-62c9b2455dd0)
+## Employee-End Preview:
+![Employee End](Images/Employee.png)
 
 
 
